@@ -1,0 +1,171 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0B0717;
+  --surface: #16102A;
+  --surface-el: #1F1838;
+  --surface-sun: #070414;
+  --primary: #8B5CF6;
+  --secondary: #A78BFA;
+  --accent: #34D399;
+  --text: #F4F1FF;
+  --text-2: #B4ABD4;
+  --text-3: #7D7599;
+  --sep: #2A2247;
+  --success: #34D399;
+  --warn: #F5B544;
+  --err: #F87171;
+  --gold: #F5C16C;
+  --font: 'Sora', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-xl: 24px;
+  --r-full: 9999px;
+}
+
+html { height: 100%; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { height: 100%; display: flex; flex-direction: column; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--sep); border-radius: 99px; }
+
+/* Utility */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--sep);
+  border-radius: var(--r-md);
+}
+
+.glass-el {
+  background: var(--surface-el);
+  border: 1px solid var(--sep);
+  border-radius: var(--r-md);
+}
+
+button { cursor: pointer; font-family: var(--font); border: none; background: none; color: inherit; }
+input, textarea, select { font-family: var(--font); }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+}
+.tag-violet { background: #8B5CF620; color: var(--secondary); }
+.tag-green  { background: #34D39920; color: var(--accent); }
+.tag-red    { background: #F8717120; color: var(--err); }
+.tag-gold   { background: #F5C16C20; color: var(--gold); }
+.tag-warn   { background: #F5B54420; color: var(--warn); }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139,92,246,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(139,92,246,0); }
+}
+.fade-up { animation: fadeUp 0.35s ease both; }
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(7,4,20,0.8);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: flex-end; justify-content: center;
+  z-index: 100;
+  padding: 0;
+}
+.modal-sheet {
+  width: 100%; max-width: 560px;
+  background: var(--surface);
+  border-radius: 24px 24px 0 0;
+  border: 1px solid var(--sep);
+  border-bottom: none;
+  padding: 24px;
+  animation: fadeUp 0.25s ease;
+}
+.modal-handle {
+  width: 40px; height: 4px;
+  background: var(--sep);
+  border-radius: 99px;
+  margin: 0 auto 20px;
+}
+
+/* Input */
+.field {
+  width: 100%;
+  background: var(--surface-el);
+  border: 1px solid var(--sep);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.field:focus { border-color: var(--primary); }
+.field::placeholder { color: var(--text-3); }
+
+/* Btn primary */
+.btn-primary {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: var(--r-sm);
+  transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-primary:active { opacity: 0.7; }
+
+/* Progress bar */
+.prog-track {
+  height: 6px;
+  background: var(--surface-sun);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Stat card */
+.stat-card {
+  background: var(--surface-el);
+  border-radius: var(--r-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.stat-label { font-size: 11px; color: var(--text-3); font-weight: 500; }
+.stat-value { font-size: 20px; font-weight: 700; }
+
+/* Divider */
+.divider { height: 1px; background: var(--sep); }
